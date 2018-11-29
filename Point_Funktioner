@@ -1,0 +1,224 @@
+namespace Yatzyspil
+{
+    public class Bæger
+    {
+        public Terning Terning1 = new Terning(); // her newes 5 terninger op af den terningeklasse der allerede er lavet
+        public Terning Terning2 = new Terning(); // public fordi vi vil kunne referere til denne andensteds.
+        public Terning Terning3 = new Terning(); // Sagt på en anden måde vi laver et objekt af en terning og gemmer i Terning3
+        public Terning Terning4 = new Terning();
+        public Terning Terning5 = new Terning();
+
+
+        public void RystBæger()
+        {
+            Terning1.KastTerning();
+            Terning2.KastTerning();
+            Terning3.KastTerning();
+            Terning4.KastTerning();
+            Terning5.KastTerning();
+        }
+
+
+
+        private int HvorMangeAfEnSlags(int Slags)
+        {
+            int Antal = 0;
+
+            if (Terning1.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning2.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning3.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning4.Øjne == Slags)
+            { Antal = Antal + 1; }
+            if (Terning5.Øjne == Slags)
+            { Antal = Antal + 1; }
+
+            return Antal;
+        }
+
+
+
+        public int PointEnere()
+        {
+            return HvorMangeAfEnSlags(1) * 1;
+        }
+
+
+        public int PointToere()
+        {
+            return HvorMangeAfEnSlags(2) * 2;
+        }
+
+
+        public int PointTreere()
+        {
+            return HvorMangeAfEnSlags(3) * 3;
+        }
+
+
+        public int PointFirere()
+        {
+            return HvorMangeAfEnSlags(4) * 4;
+        }
+
+
+        public int PointFemmere()
+        {
+            return HvorMangeAfEnSlags(5) * 5;
+        }
+
+
+        public int PointSeksere()
+        {
+            return HvorMangeAfEnSlags(6) * 6;
+        }
+
+
+
+
+        public int PointEtPar()
+        {
+            int Sum = 0;
+
+            for (int i = 6; i >= 1; --i)
+            {
+                if (HvorMangeAfEnSlags(i) > 1)
+                {
+                    Sum = HvorMangeAfEnSlags(i) * 2;
+                    return Sum;
+                }
+            }
+            return 0;
+        }
+
+
+
+        public int PointToPar()
+        {
+            int FørstePar = 0;
+            int AndetPar = 0;
+
+            for (int i = 6; i >= 1; --i)
+            {
+                if (HvorMangeAfEnSlags(i) >= 2)
+                {
+                    if (FørstePar == 0)
+                    { FørstePar = i * 2; }
+                    else if (AndetPar == 0)
+                    { AndetPar = i * 2; }
+                }
+            }
+
+            if (FørstePar > 0 && AndetPar > 0)
+
+            {
+                return FørstePar + AndetPar;
+            }
+
+            return 0;
+        }
+
+
+
+
+
+        public int PointTreEns()
+        {
+            for (int i = 6; i >= 1; --i)
+            {
+                if (HvorMangeAfEnSlags(i) > 2)
+                { return HvorMangeAfEnSlags(i) * 3; }
+            }
+            return 0;
+        }
+
+
+        public int PointFireEns()
+        {
+            for (int i = 6; i >= 1; --i)
+            {
+                if (HvorMangeAfEnSlags(i) > 3)
+                { return HvorMangeAfEnSlags(i) * 4; }
+            }
+            return 0;
+        }
+
+
+
+        public int PointLilleStraight()
+        {
+            if (HvorMangeAfEnSlags(1) == 1 && HvorMangeAfEnSlags(2) == 1 &&
+                HvorMangeAfEnSlags(3) == 1 && HvorMangeAfEnSlags(4) == 1 && HvorMangeAfEnSlags(5) == 1)
+            { return 1 + 2 + 3 + 4 + 5; }
+            return 0;
+        }
+
+
+        public int PointStoreStraight()
+        {
+            if (HvorMangeAfEnSlags(2) == 1 && HvorMangeAfEnSlags(3) == 1 &&
+                HvorMangeAfEnSlags(4) == 1 && HvorMangeAfEnSlags(5) == 1 && HvorMangeAfEnSlags(6) == 1)
+            { return 2 + 3 + 4 + 5 + 6; }
+            return 0;
+        }
+
+
+
+
+        public int PointFuldtHus()
+        {
+            int ToEns = 0;
+            int TreEns = 0;
+
+            for (int i = 6; i >= 1; i--)
+            {
+                if (HvorMangeAfEnSlags(i) == 3)
+                {
+                    TreEns = i * 3;
+
+                    if (ToEns != 0)
+                        return ToEns + TreEns;
+                }
+                else if (HvorMangeAfEnSlags (i) == 2)
+                {
+                    ToEns = i * 2;
+
+                    if (TreEns != 0)
+                        return ToEns + TreEns;
+                    }
+                }
+                return 0;
+            }
+
+
+
+
+
+
+        public int PointChancen()
+        {
+            return Terning1.Øjne + Terning2.Øjne + Terning3.Øjne + Terning4.Øjne + Terning5.Øjne;
+        }
+
+
+        public int PointYatzy()
+        {
+            if (HvorMangeAfEnSlags(1) == 5)
+            { return 5 + 50; }
+            else if (HvorMangeAfEnSlags(2) == 5)
+            { return 10 + 50; }
+            else if (HvorMangeAfEnSlags(3) == 5)
+            { return 15 + 50; }
+            else if (HvorMangeAfEnSlags(4) == 5)
+            { return 20 + 50; }
+            else if (HvorMangeAfEnSlags(5) == 5)
+            { return 25 + 50; }
+            else if (HvorMangeAfEnSlags(6) == 5)
+            { return 30 + 50; }
+
+            return 0;
+        }
+    }
+}
